@@ -5,6 +5,7 @@ using namespace std;
 int main()
 {
 cout<"hello world."<endl;
-return 0;
+cout<"edit the file for the first time. "<endl
 
+return 0;
 }
