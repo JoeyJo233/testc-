@@ -1,0 +1,30 @@
+头文件放declaration
+.cpp放definition
+#include就是在指令的位置直接插入文本
+
+由一个编译预处理指令变成.ii
+有一个编译器变成.s
+由汇编器变成.o
+ld再将a.o b.o连接在一起形成a.out
+
+编译器编译时都是针对一个编译单元来进行操作，编译时互相不知道互相的存在。
+对于全局变量，declaration:exetern int global;
+              definiton:  int global;
+编译器遇到declaration会在.o留一个位置交给ld处理
+对于头文件只能有声明，不然多个.cpp文件include .h时会出现duplicated definition
+声明：exetern variables          exetern变量
+      function prototypes        函数原型
+      class/struct declaration   类的声明
+#include"xx.h"会首先在当前目录寻找
+#include<xx.h>会首先在特定目录（对于系统头文件：系统目录）寻找
+#include<xx>和#include<.h>一样
+
+.h中加标准头文件结构是为了防止一个.cpp文件include一个.h多次而出现重复定义
+标准头文件结构： #ifndef HEADER_FLAG
+                #define HEADER_FLAG
+                //type declaration here...
+                #endif //HEADER_FLAG
+                
+建议：一个头文件中只放一个类的声明，其对应源代码文件用相同的前缀，
+后缀改为cpp,里面放函数的body，头文件要用标准头文件围绕起来。
+所有include 的东西里面只能有declaration
